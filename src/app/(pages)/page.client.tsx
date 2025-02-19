@@ -29,13 +29,12 @@ export default function HomeClient() {
         return undefined
       },
     })
-  const characters = useMemo((): Character[] => {
-    // @ts-ignore
-    return data?.pages.reduce((acc, page) => {
+  const characters = useMemo(() => {
+    return data?.pages.reduce<Character[]>((acc, page) => {
       if (CheckObjOrArrForNull(page.results)) {
         return [...acc, ...page.results]
       }
-      return [...acc]
+      return acc
     }, [])
   }, [data])
   const lastCharacter = useObserve({
